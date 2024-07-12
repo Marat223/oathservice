@@ -3,9 +3,9 @@ spring:
     name: oathservice
   h2:
     console:
-      enabled: true
+      enabled: false
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password:
     driverClassName: org.h2.Driver
@@ -17,3 +17,6 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
 server:
   port: 9000
+logging:
+  level:
+    root: DEBUG

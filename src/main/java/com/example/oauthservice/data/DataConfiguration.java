@@ -1,14 +1,10 @@
 package com.example.oauthservice.data;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.example.oauthservice.data"})
@@ -23,13 +19,35 @@ public class DataConfiguration {
         };
     }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder, DataSource dataSource) {
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder, DataSource dataSource) {
+//
+//        return builder
+//                .dataSource(dataSource)
+//                .packages("com.example.oauthservice.domain")
+//                .persistenceUnit("User")
+//                .build();
+//    }
 
-        return builder
-                .dataSource(dataSource)
-                .packages("com.example.oauthservice.domain")
-                .persistenceUnit("demo")
-                .build();
-    }
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+//        entityManagerFactoryBean.setDataSource(dataSource);
+//        entityManagerFactoryBean.setPackagesToScan("com.example.oauthservice.domain");
+//        entityManagerFactoryBean.setPersistenceUnitName("User");
+//
+//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+//        entityManagerFactoryBean.setJpaProperties(additionalProperties());
+//
+//        return entityManagerFactoryBean;
+//    }
+//
+//    private Properties additionalProperties() {
+//        Properties properties = new Properties();
+//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+//        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+//
+//        return properties;
+//    }
 }
