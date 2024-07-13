@@ -29,7 +29,7 @@ public class DataConfiguration {
         return builder
                 .dataSource(dataSource)
                 .packages("com.example.oauthservice.domain")
-                .persistenceUnit("demo")
+                .persistenceUnit("User")
                 .build();
     }
 }
