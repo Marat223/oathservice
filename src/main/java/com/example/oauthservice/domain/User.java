@@ -1,9 +1,7 @@
 package com.example.oauthservice.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.oauthservice.data.AuthorityListConverter;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,20 +12,26 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-@AllArgsConstructor
 @Entity
+@Table(name = "users", schema = "test")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @NonNull
+    @Column(nullable = false, unique = true)
     private String username;
     @NonNull
+    @Column(nullable = false)
     private String password;
     @NonNull
+    @Column(nullable = false)
+    private Boolean enabled;
+    @NonNull
     @Getter(AccessLevel.PRIVATE)
+    @Convert(converter = AuthorityListConverter.class)
     private List<? extends GrantedAuthority> authorityList;
 
     @Override
