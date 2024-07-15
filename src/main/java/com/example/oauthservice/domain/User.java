@@ -30,12 +30,11 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean enabled;
     @NonNull
-    @Getter(AccessLevel.PRIVATE)
     @Convert(converter = AuthorityListConverter.class)
-    private List<? extends GrantedAuthority> authorityList;
+    private List<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.copyOf(authorityList);
+        return List.copyOf(authorities);
     }
 }

@@ -18,8 +18,12 @@ public class DataConfiguration {
     public CommandLineRunner commandLineRunner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 
-            userRepository.save(new User("user", passwordEncoder.encode("password"), true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))));
-            userRepository.save(new User("admin", passwordEncoder.encode("password"), true, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"))));
+            if (null == userRepository.findByUsername("user")) {
+                userRepository.save(new User("user", passwordEncoder.encode("password"), true, Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))));
+            }
+            if (null == userRepository.findByUsername("admin")) {
+                userRepository.save(new User("admin", passwordEncoder.encode("password"), true, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"))));
+            }
         };
     }
 }
